@@ -1,21 +1,19 @@
-def translate string
-	string.split.map do |word|
+def translate(string)
+	words = string.split(' ')
+	words.map! do |word|
+
+		# Had it close, but wound up cheating off of 
+		# https://github.com/ultrasaurus/test-first-teaching/blob/master/learn_ruby/pig_latin/solution/pig_latin.rb
+		# after too long banging my head against the wall trying to build a regex that worked for 'qu' and didn't 
+		# break anything else.
+		word =~ /^([^aeiouyq]*(qu)?)(.*)$/x
+
+		part1 = $1
+		part2 = $3
+
+		"#{part2}#{part1}ay"
 	end
+	words.join(' ')
 end
 
-#def test string
-#	string.split.map { |word| word.upcase }
-#end
-
-def test string
-	string.split.map do |word|
-		word.upcase
-	end
-end
-
-output = test 'asdf qwer zxcv'
-output = output.join(' ')
-puts output
-array = ["a", "b", "c"]
-array.map { |string| string.upcase }
-
+#puts translate("sqrat")
